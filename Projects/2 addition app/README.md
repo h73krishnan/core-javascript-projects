@@ -10,9 +10,9 @@ Every time when the event is called new number is generated
 - There should be form and then onclick submit() 
 - This refreshes the page when the submit function is executed 
 ## event.preventDefault()
-- The form sends the request to the browser
-- It is showing
-## preventDefault()
+- The form sends the request to the browser and browser refresh as default
+- we need to prevent that
+## why event is crossed
 
 # Common Errors
 ## getElementsById is not a function
