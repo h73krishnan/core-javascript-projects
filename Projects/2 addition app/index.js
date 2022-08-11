@@ -1,37 +1,37 @@
-const num1 = Math.ceil(Math.random() * 10);
-const num2 = Math.ceil(Math.random() * 10);
+const sumNum1 = Math.ceil(Math.random() * 10);
+const sumNum2 = Math.ceil(Math.random() * 10);
+document.getElementById('question').innerHTML = `What is ${sumNum1} plus ${sumNum2}?`;
+const sumCorrect = sumNum1 + sumNum2;
 
-const questionEl = document.getElementById("question");
+document.querySelector("form").addEventListener("submit", btnFunction);
 
-const inputEl = document.getElementById("input");
-
-const formEl = document.getElementById("form");
-
-const scoreEl = document.getElementById("score");
-
-let score = JSON.parse(localStorage.getItem("score"));
-
-if (!score) {
-  score = 0;
+count = JSON.parse(localStorage.getItem("count"));
+document.getElementById("count").innerHTML = `Count: ${count}`;
+if (!count){
+    count = 0;
 }
 
-scoreEl.innerText = `score: ${score}`;
-
-questionEl.innerText = `What is ${num1} multiply by ${num2}?`;
-
-const correctAns = num1 * num2;
-
-formEl.addEventListener("submit", () => {
-  const userAns = +inputEl.value;
-  if (userAns === correctAns) {
-    score++;
-    updateLocalStorage();
-  } else {
-    score--;
-    updateLocalStorage();
-  }
-});
-
-function updateLocalStorage() {
-  localStorage.setItem("score", JSON.stringify(score));
+function btnFunction() {
+    event.preventDefault();
+    
+    let enteredNumber = document.getElementById("testId").value; 
+    console.log("sumCorrect", sumCorrect);
+    console.log("value", enteredNumber);
+    console.log("here");
+    if(enteredNumber == sumCorrect) {
+        count++;
+        countRecord();
+    }
+    else {
+        count--;
+        countRecord();
+    }
+    location.reload();
 }
+
+function countRecord() {
+    localStorage.setItem("count", JSON.stringify(count));
+}
+
+console.log("count", count);
+
