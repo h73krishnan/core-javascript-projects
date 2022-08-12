@@ -4,7 +4,7 @@ Every time when the event is called new number is generated
 2. ### form type submit
 3. ### Display 0 before local storage
 ### Time taken : 6 hours
-### Deployed link : [Addition-website](https://2-addition-locstr-formsubmit-tailwind.netlify.app/)
+### Deployed link : [Addition-website](https://2-add-formsubmit-locstr-js-tailwind.netlify.app/)
 
 
 ## Common Errors
@@ -26,5 +26,8 @@ count = JSON.parse(localStorage.getItem("count")) || '0';
 ```
 5. ### hyperlink in .md file
 - AlT+D to copy with https://
+
+6. ### css form bg not surrounding the input and button
+- Solution: use px instead of w-1/6
 
 
