@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add products to local storage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                bgRed: '#E21717',
+              }
+            }
+          }
+        }
+      </script>
+</head>
+<body class="bg-black text-white">
+    <div class="flex justify-evenly items-center h-screen mx-auto border">
+        <div class="card card-compact w-96 bg-base-100 shadow-xl">
+            <figure><img src="./Glass-set1.jpg" alt="Shoes" /></figure>
+            <div class="card-body">
+              <h2 class="card-title flex justify-center text-xl">Dinner glass set 1</h2>
+              <table class="table-auto">
+                <tbody>
+                    <tr>
+                        <td class="text-bold">
+                            Material
+                        </td>
+                        <td class="flex justify-center">:</td>
+                        <td>
+                            Glass
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-bold">
+                            Capacity
+                        </td>
+                        <td class="flex justify-center">:</td>
+                        <td>
+                            200ml-300ml
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-bold">
+                            Color
+                        </td>
+                        <td class="flex justify-center">:</td>
+                        <td>
+                            Clear
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-bold">
+                            Shape 
+                        </td>
+                        <td class="flex justify-center">:</td>
+                        <td>
+                            Long
+                        </td>
+                    </tr>
+                    <tr class="flex justify-between w-40">
+                        <td class="text-bold text-2xl">
+                            Price 
+                        </td>
+                        <td class="text-2xl">:</td>
+
+                        <td class="flex border-white text-2xl">
+                             <p>Rs.</p> <p id="price">1799</p>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+              <div class="card-actions flex justify-end">
+                <button onclick="showDetail()" class="btn btn-primary p-2 rounded bg-bgRed">Buy Now</button>
+              </div>
+            </div>
+          </div>
+          <div class="card card-compact w-96 bg-base-100 shadow-xl">
+            <figure><img src="./Glass-set2.jpg" alt="Shoes" /></figure>
+            <div class="card-body">
+                <h2 class="card-title flex justify-center text-xl">Dinner glass set 2</h2>
+                <table class="border-white">
+                    <tbody>
+                        <tr>
+                            <td class="text-bold">
+                                Material
+                            </td>
+                            <td class="flex justify-center">:</td>
+                            <td>
+                                Glass
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                Capacity
+                            </td>
+                            <td class="flex justify-center">:</td>
+                            <td>
+                                200ml-300ml
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                Color
+                            </td>
+                            <td class="flex justify-center">:</td>
+                            <td>
+                                Cream
+                            </td>
+                        </tr>
+                        <tr class="flex justify-between w-40">
+                            <td class="text-bold text-2xl">
+                                Price 
+                            </td>
+                            <td class="text-2xl">:</td>
+    
+                            <td class="flex border-white text-2xl">
+                                 <p>Rs.</p> <p id="price">1999</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              <div class="card-actions flex justify-end">
+                <button onclick="showDetail()" class="btn btn-primary p-2 rounded bg-bgRed">Buy Now</button>
+              </div>
+            </div>
+          </div>
+    </div>
+
+</body>
+</html>
+
+<script src="./index.js">
+
+</script>
