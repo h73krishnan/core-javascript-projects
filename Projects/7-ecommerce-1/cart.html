@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prod page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black">
+    <div id="container" class="h-screen flex sm:flex-col md:flex-row sm:gap-16 md:gap-4 sm:items-center md:justify-evenly bg-black mx-auto">
+
+    </div>
+</body>
+</html>
+
+<script>
+    let cartFromLocStr = JSON.parse(localStorage.getItem('cartToLocStr'))
+
+    cartFromLocStr.map((elem) =>{
+        let imageIndividual = document.createElement("img");
+        imageIndividual.src = elem.image;
+        imageIndividual.setAttribute("class", "object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500");
+
+        let nameIndividual = document.createElement("h2");
+        nameIndividual.setAttribute("class","text-3xl font-semibold tracking-wide");
+        nameIndividual.innerHTML = elem.name;
+
+        let descIndividual = document.createElement("p");
+        descIndividual.setAttribute("class","dark:text-gray-100");
+        descIndividual.innerHTML = elem.desc;
+
+        let priceIndividual = document.createElement("p");
+        priceIndividual.setAttribute("class","dark:text-gray-100");
+        priceIndividual.innerHTML =`Price : ${elem.price}`;
+
+        let divText = document.createElement("div");
+        divText.setAttribute("class", "flex flex-col justify-between p-6 space-y-8");
+
+        let removeBtn = document.createElement("button");
+        removeBtn.innerHTML = "Remove";
+        removeBtn.setAttribute("class", "flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-red-400 dark:text-gray-900");
+        removeBtn.addEventListener("click", () =>{
+            removeElement(elem, index);
+        })
+
+        divText.append(nameIndividual, descIndividual, priceIndividual, removeBtn);
+
+        let divMain = document.createElement("div");
+        divMain.setAttribute("class", "max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100");
+
+        divMain.append(imageIndividual, divText);
+
+        document.getElementById("container").append(divMain);
+        
+    })
+
+</script>
