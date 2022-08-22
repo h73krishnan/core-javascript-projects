@@ -15,6 +15,7 @@
 </html>
 
 <script>
+    // 6.receivelocStorage.html
     let detailFromLocStr = JSON.parse(localStorage.getItem('detailToLocStr'));
 
     // see README.md
@@ -22,7 +23,7 @@
 
     // display start
     let imageIndividual = document.createElement("img");
-    imageIndividual.src = detailFromLocStr.image;
+    imageIndividual.src = detailFromLocStr.imageSrc;
     imageIndividual.setAttribute("class", "object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500");
 
     let nameIndividual = document.createElement("h2");

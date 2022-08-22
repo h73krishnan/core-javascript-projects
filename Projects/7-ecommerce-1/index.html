@@ -34,35 +34,36 @@
 <script>
     let rodeProducts = [
         {
-            image:"https://edge.rode.com//images/products/849/rode-videomic-go-II-side_quarter_front-250-260-rgb.png",
+            imageSrc:"https://edge.rode.com//images/products/849/rode-videomic-go-II-side_quarter_front-250-260-rgb.png",
             name: "VideoMic GO II",
             desc:"Lightweight Directional Microphone",
             price:"₹9,999"
         },
         {
-            image:"https://edge.rode.com//images/products/variants/66/rode-wigo2_hero_image_final_2-rgb_1080x1080.png",
+            imageSrc:"https://edge.rode.com//images/products/variants/66/rode-wigo2_hero_image_final_2-rgb_1080x1080.png",
             name:"Wireless GO II",
             desc:"Dual Channel Wireless Microphone", 
             price:"₹29,949.00"
         },
         {
-            image:"https://edge.rode.com//images/products/96/rode-nt-usb-mini-magnet-function-march-2021-250-260-rgb.png",
+            imageSrc:"https://edge.rode.com//images/products/96/rode-nt-usb-mini-magnet-function-march-2021-250-260-rgb.png",
             name: "NT-USB Mini",
             desc:"Studio-Quality USB Microphone",
             price:"₹10,899"
         },
         {
-            image:"https://edge.rode.com//images/products/633/RØDE_VM-NTG_3-QUARTER_FRONT_250x260.png",
+            imageSrc:"https://edge.rode.com//images/products/633/RØDE_VM-NTG_3-QUARTER_FRONT_250x260.png",
             name:"VideoMic NTG",
             desc:"On-Camera Shotgun Microphone",
             price:"₹22,920"
         }
     ]
-
+    // 1. Map function
     rodeProducts.map((elem) =>{
         // console.log(elem);
+        // 3. multilayered append
         let imageIndividual = document.createElement("img");
-        imageIndividual.src = elem.image;
+        imageIndividual.src = elem.imageSrc;
         imageIndividual.setAttribute("class", "object-cover object-center w-full rounded-t-md h-60 dark:bg-gray-500 md:w-72");
 
         let nameIndividual = document.createElement("h2");
@@ -87,12 +88,14 @@
 
         divMain.append(imageIndividual, divText);
 
+        // 4. Go to another page
         let a = document.createElement("a");
         a.href = "detail.html"; 
         a.append(divMain);
 
         document.getElementById("container").append(a);
 
+        // 5. Add data to local storage
         a.addEventListener("click", () =>{
             goToDetail(elem);
             // console.log("inside a", elem);
@@ -100,7 +103,7 @@
         });
 
     })
-
+    // 5. Add to local storage
     goToDetail = (elemReceived) =>{
         let detailData = [];
         detailData = elemReceived;
