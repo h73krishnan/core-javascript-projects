@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black">
+    <div id="container" class="h-screen flex justify-center items-center mx-auto">
+
+    </div>
+</body>
+</html>
+
+<script>
+    let detailFromLocStr = JSON.parse(localStorage.getItem('detailToLocStr'));
+
+    // see README.md
+    let cartData = JSON.parse(localStorage.getItem('cartToLocStr')) || [];
+
+    // display start
+    let imageIndividual = document.createElement("img");
+    imageIndividual.src = detailFromLocStr.image;
+    imageIndividual.setAttribute("class", "object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500");
+
+    let nameIndividual = document.createElement("h2");
+    nameIndividual.setAttribute("class","text-3xl font-semibold tracking-wide");
+    nameIndividual.innerHTML = detailFromLocStr.name;
+
+    let descIndividual = document.createElement("p");
+    descIndividual.setAttribute("class","dark:text-gray-100");
+    descIndividual.innerHTML = detailFromLocStr.desc;
+
+    let priceIndividual = document.createElement("p");
+    priceIndividual.setAttribute("class","dark:text-gray-100");
+    priceIndividual.innerHTML = detailFromLocStr.price;
+
+    let moreDetails = document.createElement("p");
+    moreDetails.innerHTML = "More details..."
+
+    let divText = document.createElement("div");
+    divText.setAttribute("class", "flex flex-col justify-between p-6 space-y-8");
+
+    divText.append(nameIndividual, descIndividual, priceIndividual, moreDetails);
+
+    // let formQuant = document.createElement("form");
+    // formQuant.onclick = "clickBtn(event)";
+
+    let quantDiv = document.createElement("div");
+    quantDiv.setAttribute("class", "my-3 w-3/4 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100");
+
+    let quantLabel = document.createElement("label");
+    quantLabel.setAttribute("class", "text-md mx-6");
+    quantLabel.innerHTML = "Quantity";
+
+    let quantSelect = document.createElement("select");
+    quantSelect.setAttribute("class", "select mx-6 border-2 rounded border-black w-full max-w-xs text-gray-900");
+    quantSelect.setAttribute("id", "quant")
+
+    let quantOption1 = document.createElement("option");
+    quantOption1.value = 1;
+    quantOption1.innerHTML = "1";
+    
+    let quantOption2 = document.createElement("option");
+    quantOption2.value = 2;
+    quantOption2.innerHTML = "2";
+
+    let quantOption3 = document.createElement("option");
+    quantOption3.value = 3;
+    quantOption3.innerHTML = "3";
+
+    let quantOption4 = document.createElement("option");
+    quantOption3.value = 4;
+    quantOption3.innerHTML = "4+";
+
+    quantSelect.append(quantOption1, quantOption2, quantOption3, quantOption4);
+    quantDiv.append(quantLabel, quantSelect);
+
+
+    // let btnDiv = document.createElement("div");
+
+    let btn = document.createElement("button");
+    btn.setAttribute("class", "flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-violet-400 dark:text-gray-900");
+    btn.innerHTML = `Add to Cart`;
+    // btn.onclick = "clickBtn(event)"
+    // what is the purpose of not using addEventListener?
+    btn.addEventListener("click", () =>{
+        addToCart(detailFromLocStr);
+    });
+    // btnDiv.append(btn);
+
+    // formQuant.append(quantDiv, btn);
+
+
+    let divTextBtn = document.createElement("div");
+    divTextBtn.append(divText, quantDiv, btn);
+
+    let divMain = document.createElement("div");
+    divMain.setAttribute("class", "max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100");
+
+    divMain.append(imageIndividual, divTextBtn);
+
+    document.getElementById("container").append(divMain);
+    // display end
+
+    // adding to cart
+    addToCart = () => {
+        // event.preventDefault();
+        cartData.push(detailFromLocStr);
+        localStorage.setItem("cartToLocStr", JSON.stringify(cartData));
+        console.log("here");
+
+        // why we are not using form
+        // let form = document.querySelector("form");
+        // let quantInput = form.quant.value;
+        let quantInput = document.getElementById("quant").value;
+        console.log(quantInput);
+        if (quantInput < 4){
+            localStorage.setItem("quantToLocStr", JSON.stringify(quantInput));  
+        }
+        else {
+            alert("For 4+ quantity, please create business account");
+        }        
+        window.location.href="cart.html";
+    }
+
+    
+    
+</script>

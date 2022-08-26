@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prod page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white">
+    <div class="flex flex-col mx-auto my-8 h-20">
+        <div class="flex justify-center gap-20 my-10">
+            <div id="total" class="text-xl">
+
+            </div>
+            <div>
+                <a href="detail.html" class="no-underline text-xl dark:bg-violet-400 dark:text-gray-900 rounded p-2">
+                    <button>
+                        Go to detail page
+                    </button>
+                </a>
+            </div>
+            <div>
+                <a href="index.html" class="no-underline text-xl dark:bg-violet-400 dark:text-gray-900 rounded p-2">
+                    <button>
+                        Add more products
+                    </button>
+                </a>
+            </div>
+        </div>
+        
+        <div id="container" class="h-screen flex sm:flex-col md:flex-row sm:gap-16 md:gap-4 sm:items-center md:justify-evenly bg-black mx-auto">
+    
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let cartFromLocStr = JSON.parse(localStorage.getItem('cartToLocStr'));
+    let quantFromLocStr = JSON.parse(localStorage.getItem('quantToLocStr'));
+    console.log(quantFromLocStr);
+
+    console.log(cartFromLocStr);
+    if (cartFromLocStr === null){
+        console.log("inside cart null check");
+        document.getElement("body").innerHTML = "";
+
+        let cartEmpty = document.createElement("p");
+        cartEmpty.innerHTML = "Cart empty";
+        cartEmpty.setAttribute("class", "text-2xl text-white");
+        
+        let moreProdBtn = document.createElement("button");
+        moreProdBtn.innerHTML = "Add more products";
+        moreProdBtn.setAttribute("class","no-underline text-xl dark:bg-violet-400 dark:text-gray-900 rounded p-2" );
+
+        document.querySelector("body").append(cartEmpty, moreProdBtn);
+    }
+    else {
+            //  Finding  
+        console.log(cartFromLocStr);
+        let total = cartFromLocStr.map((elem) => {
+            let priceElement = elem.price;
+            let arrOfStr = priceElement.split(",").join("").split(" ");         
+            let num = Number(arrOfStr[1]);
+            return num
+        }).reduce((sum, num, i, arr) => {
+            return sum + num;
+        },0);
+
+        console.log(total);
+
+        if (quantFromLocStr != 0){
+            total = total * quantFromLocStr;
+        }
+        document.getElementById("total").innerHTML = `Total : ${total}`;
+
+        // Display card inside the cart
+        cartFromLocStr.map((elem, index) =>{
+            let imageIndividual = document.createElement("img");
+            imageIndividual.src = elem.image;
+            imageIndividual.setAttribute("class", "object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500");
+
+            let nameIndividual = document.createElement("h2");
+            nameIndividual.setAttribute("class","text-3xl font-semibold tracking-wide");
+            nameIndividual.innerHTML = elem.name;
+
+            let descIndividual = document.createElement("p");
+            descIndividual.setAttribute("class","dark:text-gray-100");
+            descIndividual.innerHTML = elem.desc;
+
+            let priceIndividual = document.createElement("p");
+            priceIndividual.setAttribute("class","dark:text-gray-100");
+            priceIndividual.innerHTML =`Price : ${elem.price}`;
+
+            let quantDisplay = document.createElement("p");
+            quantDisplay.setAttribute("class","dark:text-gray-100");
+            quantDisplay.innerHTML = quantFromLocStr;
+
+            let divText = document.createElement("div");
+            divText.setAttribute("class", "flex flex-col justify-between p-6 space-y-8");
+
+            let removeBtn = document.createElement("button");
+            removeBtn.innerHTML = "Remove";
+            removeBtn.setAttribute("class", "flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-red-400 dark:text-gray-900");
+            removeBtn.addEventListener("click", () =>{
+                removeElement(elem, index);
+            });
+
+            let selectBtn = document.createElement("button");
+            selectBtn.innerHTML = "Select address";
+            selectBtn.setAttribute("class", "flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-red-400 dark:text-gray-900");
+            
+            let aToCardDetails = document.createElement("a");
+            aToCardDetails.href = "address.html"
+
+            aToCardDetails.append(selectBtn);
+
+            divText.append(nameIndividual, descIndividual, priceIndividual, quantDisplay, removeBtn, aToCardDetails);
+
+            let divMain = document.createElement("div");
+            divMain.setAttribute("class", "max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100");
+
+            divMain.append(imageIndividual, divText);
+
+            document.getElementById("container").append(divMain);
+            
+        })
+
+        removeElement = (elemReceived, indexReceived) =>{
+            console.log("inside removeF");
+            cartFromLocStr.splice(indexReceived, 1);
+            localStorage.setItem("cartToLocStr",JSON.stringify(cartFromLocStr));
+            window.location.reload();
+        }
+
+    }
+
+    
+</script>

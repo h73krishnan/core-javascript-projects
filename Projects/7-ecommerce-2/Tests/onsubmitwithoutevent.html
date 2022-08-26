@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <form onsubmit="submitFunction()">
+        <div class="flex flex-col my-3">
+            <label for="quantity" class="text-md">Quantity</label>
+            <select id="quant" class="select border-2 rounded border-black w-full max-w-xs text-gray-900">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <input type="submit">
+    </form>
+</body>
+</html>
+
+<script>
+    submitFunction = () =>{
+        let quantInput = document.getElementById("quant").value;
+        console.log(quantInput);
+    }
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity DOM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <form onsubmit="submitFunction(event)">
+        <div id="container">
+
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+
+    </form>
+</body>
+</html>
+
+<script>
+    let quantDiv = document.createElement("div");
+    quantDiv.setAttribute("class", "my-3 max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100");
+
+    let quantLabel = document.createElement("label");
+    quantLabel.setAttribute("class", "text-md");
+    quantLabel.innerHTML = "Quantity";
+
+    let quantSelect = document.createElement("select");
+    quantSelect.setAttribute("class", "select border-2 rounded border-black w-full max-w-xs text-gray-900");
+    quantSelect.setAttribute("id", "quant")
+
+    let quantOption1 = document.createElement("option");
+    quantOption1.value = 1;
+    quantOption1.innerHTML = "1";
+    
+    let quantOption2 = document.createElement("option");
+    quantOption2.value = 2;
+    quantOption2.innerHTML = "2";
+
+    let quantOption3 = document.createElement("option");
+    quantOption3.value = 3;
+    quantOption3.innerHTML = "3";
+
+    quantSelect.append(quantOption1, quantOption2, quantOption3);
+    document.querySelector("#container").append(quantLabel, quantSelect);
+
+    
+    submitFunction = (event) => {
+        event.preventDefault();
+
+        let form = document.querySelector("form");
+        let quantInput = form.quant.value;
+
+        console.log(quantInput);
+    }
+
+
+
+</script>

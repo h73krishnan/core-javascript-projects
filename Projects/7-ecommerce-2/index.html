@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prod page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            screens: {
+            'sm': '300px',
+            // => @media (min-width: 640px) { ... }
+
+            'md': '700px',
+            // => @media (min-width: 768px) { ... }
+
+            'lg': '1025px',
+            // => @media (min-width: 1024px) { ... }
+            }, 
+            extend:{
+                colors: {
+                bgGreen : '#3DBE29',
+                bgBlack : '#0D0D0D' 
+            }
+            }
+          }
+        }
+      </script>
+</head>
+<body class="bg-bgBlack text-white">
+    <div class="flex flex-col mx-auto my-8 h-20">
+        <div id="cartLength" class="my-3 flex justify-center">
+            <a href="cart.html" class="no-underline text-xl rounded p-2 dark:bg-violet-400 dark:text-gray-900">
+                <button>
+                    Go to cart page
+                </button>
+            </a>
+        </div>
+        
+        <div id="container" class="h-screen flex sm:flex-col md:flex-row sm:gap-16 md:gap-4 sm:items-center md:justify-evenly bg-black mx-auto">
+    
+        </div>
+    </div>
+    
+    
+</body>
+</html>
+
+<script>
+    let rodeProducts = [
+        {
+            image:"https://edge.rode.com//images/products/849/rode-videomic-go-II-side_quarter_front-250-260-rgb.png",
+            name: "VideoMic GO II",
+            desc:"Lightweight Directional Microphone",
+            price:"₹ 9,999"
+        },
+        {
+            image:"https://edge.rode.com//images/products/variants/66/rode-wigo2_hero_image_final_2-rgb_1080x1080.png",
+            name:"Wireless GO II",
+            desc:"Dual Channel Wireless Microphone", 
+            price:"₹ 29,949"
+        },
+        {
+            image:"https://edge.rode.com//images/products/96/rode-nt-usb-mini-magnet-function-march-2021-250-260-rgb.png",
+            name: "NT-USB Mini",
+            desc:"Studio-Quality USB Microphone",
+            price:"₹ 10,899"
+        },
+        {
+            image:"https://edge.rode.com//images/products/633/RØDE_VM-NTG_3-QUARTER_FRONT_250x260.png",
+            name:"VideoMic NTG",
+            desc:"On-Camera Shotgun Microphone",
+            price:"₹ 22,920"
+        }
+    ]; 
+    let cartData = JSON.parse(localStorage.getItem("cartToLocStr"));
+    // Finding the number of items in the cart
+    let lengthCart = 0;
+    if (cartData !== null) {
+        lengthCart = cartData.length;
+    }
+
+    let lengthDisplay = document.createElement("p");
+    lengthDisplay.innerHTML = lengthCart;
+    lengthDisplay.setAttribute("class", "w-7 h-7 -mx-3 -my-3 rounded-full bg-bgGreen flex justify-center items-center")
+
+    document.getElementById("cartLength").append(lengthDisplay);
+
+    rodeProducts.map((elem) =>{
+        // console.log(elem);
+        let imageIndividual = document.createElement("img");
+        imageIndividual.src = elem.image;
+        imageIndividual.setAttribute("class", "object-cover object-center w-full rounded-t-md h-60 dark:bg-gray-500 md:w-72");
+
+        let nameIndividual = document.createElement("h2");
+        nameIndividual.setAttribute("class","text-3xl font-semibold tracking-wide");
+        nameIndividual.innerHTML = elem.name;
+
+        let descIndividual = document.createElement("p");
+        descIndividual.setAttribute("class","dark:text-gray-100");
+        descIndividual.innerHTML = elem.desc;
+
+        let priceIndividual = document.createElement("p");
+        priceIndividual.setAttribute("class","dark:text-gray-100");
+        priceIndividual.innerHTML =`Price : ${elem.price}`;
+
+        let divText = document.createElement("div");
+        divText.setAttribute("class", "flex flex-col justify-between p-6 space-y-8");
+
+        divText.append(nameIndividual, descIndividual, priceIndividual);
+
+        let divMain = document.createElement("div");
+        divMain.setAttribute("class", "max-w-xs rounded-md shadow-md ");
+
+        divMain.append(imageIndividual, divText);
+
+        let a = document.createElement("a");
+        a.href = "detail.html"; 
+        a.append(divMain);
+
+        document.getElementById("container").append(a);
+
+        a.addEventListener("click", () =>{
+            goToDetail(elem);
+            // console.log("inside a", elem);
+            // console.log("inside event click");
+        });
+
+    })
+
+    goToDetail = (elemReceived) =>{
+        let detailData = [];
+        detailData = elemReceived;
+        // console.log(elemReceived);
+        // console.log("inside the detail");
+        localStorage.setItem("detailToLocStr", JSON.stringify(detailData));
+    }
+</script>
